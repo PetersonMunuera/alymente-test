@@ -1,3 +1,6 @@
+'use client'
+
+import { Button } from '@/components/design-system/button'
 import { users } from '@/components/design-system/data'
 import { DataTable } from '@/components/design-system/data-table'
 
@@ -8,6 +11,8 @@ export default function Home() {
     <div className="flex flex-col gap-4 font-[family-name:var(--font-geist-sans)]">
       <h1 className="text-2xl font-bold tracking-tight">Usuários</h1>
       <DataTable columns={columns} data={users} />
+
+      <Button onClick={() => console.log('test')}>teste</Button>
     </div>
   )
 }
