@@ -17,7 +17,7 @@ export async function getUsers({ page, limit }: GetUsersParams) {
     const response = await fetch(url, {
       cache: 'force-cache',
       next: {
-        tags: ['delete-user'],
+        tags: ['create-user', 'delete-user'],
       },
     })
 
