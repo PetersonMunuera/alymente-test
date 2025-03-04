@@ -1,6 +1,7 @@
 'use client'
 
 import { Pencil, Search, Trash } from 'lucide-react'
+import Link from 'next/link'
 import { useState } from 'react'
 
 import { User } from '@/app/@types/user'
@@ -33,10 +34,12 @@ export function DataRow({ data, columns }: DataRowProps) {
         </TableCell>
       ))}
       <TableCell>
-        <Button variant="outline" size="sm">
-          <Pencil className="h-3 w-3" />
-          <span className="sr-only">Editar usuário</span>
-        </Button>
+        <Link href={`/user/${data.id}/edit`}>
+          <Button variant="outline" size="sm">
+            <Pencil className="h-3 w-3" />
+            <span className="sr-only">Editar usuário</span>
+          </Button>
+        </Link>
       </TableCell>
       <TableCell>
         <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>

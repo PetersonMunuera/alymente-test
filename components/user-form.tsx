@@ -6,6 +6,7 @@ import { toast } from 'sonner'
 import zod from 'zod'
 
 import { createUser } from '@/api/create-user'
+import { editUser } from '@/api/edit-user'
 import { User } from '@/app/@types/user'
 
 import { Button } from './ui/button'
@@ -25,12 +26,10 @@ const userFormSchema = zod.object({
 
 type UserFormData = zod.infer<typeof userFormSchema>
 interface UserFormProps {
-  data?: User
+  userData?: User
 }
 
-export function UserForm({ data }: UserFormProps) {
-  console.log(data)
-
+export function UserForm({ userData }: UserFormProps) {
   const {
     register,
     handleSubmit,
@@ -39,20 +38,21 @@ export function UserForm({ data }: UserFormProps) {
     formState: { errors },
   } = useForm<UserFormData>({
     resolver: zodResolver(userFormSchema),
+    values: userData,
   })
 
   async function handleUserForm(data: UserFormData) {
-    console.log(data)
+    const user = !userData
+      ? await createUser({ user: data })
+      : await editUser({ userId: userData.id, userData: data })
 
-    const createdUser = await createUser({ user: data })
-
-    const toastMessage = createdUser
-      ? `Usuário ${createdUser.name} cadastrado com sucesso.`
+    const toastMessage = user
+      ? `Usuário ${user.name} ${!userData ? 'cadastrado' : 'editado'} com sucesso.`
       : 'Falha ao excluir usuário'
 
     toast(toastMessage)
 
-    reset()
+    if (!userData) reset()
   }
 
   return (
@@ -76,37 +76,44 @@ export function UserForm({ data }: UserFormProps) {
         />
       </div>
       <div className="space-y-2">
-        <Input placeholder="Nome" {...register('name')} />
+        <Label htmlFor="name">Nome</Label>
+        <Input id="name" placeholder="Nome" {...register('name')} />
         <div className="text-xs text-destructive">{errors.name?.message}</div>
       </div>
       <div className="space-y-2">
-        <Input placeholder="País" {...register('country')} />
+        <Label htmlFor="country">País</Label>
+        <Input id="country" placeholder="País" {...register('country')} />
         <div className="text-xs text-destructive">
           {errors.country?.message}
         </div>
       </div>
       <div className="space-y-2">
-        <Input placeholder="Cidade" {...register('city')} />
+        <Label htmlFor="city">Cidade</Label>
+        <Input id="city" placeholder="Cidade" {...register('city')} />
         <div className="text-xs text-destructive">{errors.city?.message}</div>
       </div>
       <div className="space-y-2">
-        <Input placeholder="Empresa" {...register('company')} />
+        <Label htmlFor="company">Empresa</Label>
+        <Input id="company" placeholder="Empresa" {...register('company')} />
         <div className="text-xs text-destructive">
           {errors.company?.message}
         </div>
       </div>
       <div className="space-y-2">
-        <Input placeholder="Cargo" {...register('job')} />
+        <Label htmlFor="job">Cargo</Label>
+        <Input id="job" placeholder="Cargo" {...register('job')} />
         <div className="text-xs text-destructive">{errors.job?.message}</div>
       </div>
       <div className="space-y-2">
-        <Input placeholder="Conta" {...register('account')} />
+        <Label htmlFor="account">Conta</Label>
+        <Input id="account" placeholder="Conta" {...register('account')} />
         <div className="text-xs text-destructive">
           {errors.account?.message}
         </div>
       </div>
       <div className="space-y-2">
-        <Input placeholder="Nome da mãe" {...register('mother')} />
+        <Label htmlFor="mother">Nome da mãe</Label>
+        <Input id="mother" placeholder="Nome da mãe" {...register('mother')} />
         <div className="text-xs text-destructive">{errors.mother?.message}</div>
       </div>
 
