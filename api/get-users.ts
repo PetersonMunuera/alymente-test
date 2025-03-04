@@ -1,14 +1,12 @@
 import { User } from '@/app/@types/user'
 
-const { API_URL } = process.env
-
 interface GetUsersParams {
   page?: number
   limit?: number
 }
 
 export async function getUsers({ page, limit }: GetUsersParams) {
-  const url = new URL(`${API_URL}/users`)
+  const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}/users`)
 
   if (page && limit) {
     url.searchParams.append('page', String(page))
@@ -16,7 +14,12 @@ export async function getUsers({ page, limit }: GetUsersParams) {
   }
 
   try {
-    const response = await fetch(url)
+    const response = await fetch(url, {
+      cache: 'force-cache',
+      next: {
+        tags: ['delete-user'],
+      },
+    })
 
     if (!response.ok) {
       throw new Error(`Erro ao buscar usuários: ${response.statusText}`)

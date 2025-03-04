@@ -1,4 +1,4 @@
-import { getUsers } from '@/api/users'
+import { getUsers } from '@/api/get-users'
 import { DataTable } from '@/components/design-system/data-table'
 import { Pagination } from '@/components/pagination'
 
