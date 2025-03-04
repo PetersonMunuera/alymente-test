@@ -1,6 +1,7 @@
 'use client'
 
-import { toast } from "sonner"
+import { toast } from 'sonner'
+
 import { deleteUser } from '@/api/delete-user'
 import { User } from '@/app/@types/user'
 import { Button } from '@/components/ui/button'
@@ -15,15 +16,19 @@ import {
 
 interface DeleteDialogProps {
   user: User
+  handleIsOpen: (isOpen: boolean) => void
 }
 
-export function DeleteDialog({ user }: DeleteDialogProps) {
+export function DeleteDialog({ user, handleIsOpen }: DeleteDialogProps) {
   async function handleDeleteUser() {
     const deletedUser = await deleteUser({ userId: user.id })
 
-    const toastMessage = deletedUser ? `Usuário ${deletedUser.name} excluído com sucesso.` : 'Falha ao excluir usuário'
+    const toastMessage = deletedUser
+      ? `Usuário ${deletedUser.name} excluído com sucesso.`
+      : 'Falha ao excluir usuário'
 
     toast(toastMessage)
+    handleIsOpen(false)
   }
 
   return (
@@ -40,11 +45,7 @@ export function DeleteDialog({ user }: DeleteDialogProps) {
             Cancelar
           </Button>
         </DialogClose>
-        <Button
-          type="submit"
-          onClick={handleDeleteUser}
-          variant="destructive"
-        >
+        <Button type="submit" onClick={handleDeleteUser} variant="destructive">
           Excluir usuário
         </Button>
       </DialogFooter>

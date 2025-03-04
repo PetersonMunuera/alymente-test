@@ -1,4 +1,7 @@
+'use client'
+
 import { Pencil, Search, Trash } from 'lucide-react'
+import { useState } from 'react'
 
 import { User } from '@/app/@types/user'
 import { Button } from '@/components/ui/button'
@@ -14,6 +17,8 @@ interface DataRowProps {
 }
 
 export function DataRow({ data, columns }: DataRowProps) {
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
+
   return (
     <TableRow key={data.id}>
       <TableCell>
@@ -34,14 +39,14 @@ export function DataRow({ data, columns }: DataRowProps) {
         </Button>
       </TableCell>
       <TableCell>
-        <Dialog>
+        <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
           <DialogTrigger asChild>
             <Button variant="outline" size="sm">
               <Trash className="h-3 w-3" />
               <span className="sr-only">Excluir usuário</span>
             </Button>
           </DialogTrigger>
-          <DeleteDialog user={data} />
+          <DeleteDialog user={data} handleIsOpen={setIsDeleteDialogOpen} />
         </Dialog>
       </TableCell>
     </TableRow>
