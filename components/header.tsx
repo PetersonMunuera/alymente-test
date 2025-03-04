@@ -10,7 +10,7 @@ import { Separator } from './ui/separator'
 export function Header() {
   return (
     <header className="border-b">
-      <div className="flex h-16 items-center gap-6 px-6">
+      <div className="flex h-16 items-center gap-2 px-2 md:gap-6 md:px-6">
         <Image priority src={logoImg} width={120} alt="logo" />
 
         <Separator orientation="vertical" className="h-6" />
@@ -28,11 +28,11 @@ export function Header() {
             className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground data-[current=true]:text-foreground"
           >
             <UserRoundPlus className="h-4 w-4" />
-            Cadastrar usuário
+            Novo usuário
           </Link>
         </nav>
 
-        <div className="ml-auto">
+        <div className="ml-auto hidden md:flex">
           <ThemeToggle />
         </div>
       </div>

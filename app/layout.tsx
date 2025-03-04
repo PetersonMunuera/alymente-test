@@ -36,7 +36,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
-          <main className="flex flex-1 flex-col gap-4 p-8 pt-6">
+          <main className="flex flex-1 flex-col gap-4 p-2 pt-6 md:p-6">
             {children}
           </main>
           <Toaster />

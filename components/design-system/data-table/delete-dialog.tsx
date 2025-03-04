@@ -39,7 +39,7 @@ export function DeleteDialog({ user, handleIsOpen }: DeleteDialogProps) {
           Deseja realmente excluir esse usuário?
         </DialogDescription>
       </DialogHeader>
-      <DialogFooter>
+      <DialogFooter className="flex gap-2">
         <DialogClose asChild>
           <Button type="button" variant="ghost">
             Cancelar
