@@ -58,9 +58,9 @@ export function UserForm({ userData }: UserFormProps) {
   return (
     <form
       onSubmit={handleSubmit(handleUserForm)}
-      className="max-w-lg space-y-4"
+      className="grid max-w-4xl grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2"
     >
-      <div className="grid w-full items-center gap-1.5">
+      <div className="space-y-2">
         <Label htmlFor="picture">Avatar</Label>
         <Input
           id="picture"
@@ -117,10 +117,7 @@ export function UserForm({ userData }: UserFormProps) {
         <div className="text-xs text-destructive">{errors.mother?.message}</div>
       </div>
 
-      <div className="flex gap-2">
-        <Button variant="secondary" type="reset">
-          Limpar campos
-        </Button>
+      <div className="mt-4 flex gap-2">
         <Button type="submit">Salvar</Button>
       </div>
     </form>

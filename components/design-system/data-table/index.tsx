@@ -25,7 +25,6 @@ export function DataTable({ columns, data }: DataTableProps) {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[64px]"></TableHead>
             {columns.map((column) => (
               <TableHead key={column.accessorKey}>{column.header}</TableHead>
             ))}

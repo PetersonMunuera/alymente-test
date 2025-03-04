@@ -1,6 +1,6 @@
 'use client'
 
-import { Pencil, Search, Trash } from 'lucide-react'
+import { Pencil, Trash } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -22,12 +22,6 @@ export function DataRow({ data, columns }: DataRowProps) {
 
   return (
     <TableRow key={data.id}>
-      <TableCell>
-        <Button variant="outline" size="sm">
-          <Search className="h-3 w-3" />
-          <span className="sr-only">Detalhes do usuário</span>
-        </Button>
-      </TableCell>
       {columns.map((column) => (
         <TableCell key={column.accessorKey}>
           {data[column.accessorKey]}
